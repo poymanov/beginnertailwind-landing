@@ -1,0 +1,16 @@
+version: '3'
+services:
+    node:
+        build:
+            context: docker/node
+        volumes:
+            - .:/app
+        command: sh -c "until [ -f .ready ] ; do sleep 1 ; done && npm run serve"
+        tty: true
+        ports:
+            - "8080:8080"
+    node-cli:
+        build:
+            context: docker/node
+        volumes:
+            - .:/app
